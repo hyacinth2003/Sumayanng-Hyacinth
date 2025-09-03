@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f4f8;
+    }
+
+    .container {
+      text-align: center;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 10px 0;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .btn-secondary {
+      background-color: #008CBA;
+    }
+
+    .btn-secondary:hover {
+      background-color: #007bb5;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Save & Fetch Data</h1>
+    <button id="saveBtn">Save Data</button>
+    <button id="fetchdataBtn" class="btn-secondary">Fetch Data</button>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycby-mNErhcJhWElQgEp8CR2a6XVV3ntFEbLBxQyvg8PcIUzIDhKzbGdbebKhwcDxp3sc/exec"; // paste your Web App URL here
+
+    document.getElementById("saveBtn").addEventListener("click", () => {
+      const payload = { name: "John Doe", score: 95 };
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.text())
+      .then(msg => alert(msg))
+      .catch(err => console.error("Error:", err));
+    });
+
+    document.getElementById("fetchdataBtn").addEventListener("click", () => {
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => console.log(data));
+    });
+  </script>
+</body>
+</html>
